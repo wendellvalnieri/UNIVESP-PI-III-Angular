@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicosService } from '../../../services/servicos.service';
 import { Servico } from '../../../models/servico.model';
+import { ResponseRequest } from '../../../models/auth.model';
 
 @Component({
     selector: 'app-servicos-list',
@@ -21,8 +22,8 @@ export class ServicosListComponent implements OnInit {
     loadServicos(): void {
         this.loading = true;
         this.servicosService.getAll().subscribe({
-            next: (data) => {
-                this.servicos = data;
+            next: (data: any) => {
+                this.servicos = data.data;
                 this.loading = false;
             },
             error: (error) => {

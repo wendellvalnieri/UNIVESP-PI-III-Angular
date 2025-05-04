@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+/* Removendo a importação direta do bootstrap-icons que estava causando erro */
+
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/* Classes para substituir os ícones do Bootstrap Icons */
+.icon-eye:before {
+    content: "👁";
+}
+
+.icon-pencil:before {
+    content: "✏️";
+}
+
+.icon-trash:before {
+    content: "🗑️";
+}

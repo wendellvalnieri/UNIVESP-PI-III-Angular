@@ -12,6 +12,7 @@ import { Servico } from '../../../models/servico.model';
 export class ServicoFormComponent implements OnInit {
     servicoForm: FormGroup;
     isEditMode: boolean = false;
+    isViewMode: boolean = false;
     servicoId: string = '';
     loading: boolean = false;
     submitted: boolean = false;
@@ -35,10 +36,17 @@ export class ServicoFormComponent implements OnInit {
         this.servicoId = this.route.snapshot.params['id'];
         this.isEditMode = !!this.servicoId;
 
+        this.isViewMode = location.href.includes("editar");
+        this.route.params.subscribe(params => {
+            this.servicoId = params['id'];
+            this.isEditMode = !!this.servicoId;
+        })
+
         if (this.isEditMode) {
             this.loading = true;
             this.servicosService.getById(this.servicoId).subscribe({
-                next: (servico) => {
+                next: (response: any) => {
+                    const servico: Servico = response.data;
                     this.servicoForm.patchValue({
                         nome: servico.nome,
                         preco: servico.preco,

@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Servico } from '../models/servico.model';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
     providedIn: 'root'
 })
+
 export class ServicosService {
-    private baseUrl = 'http://localhost:4333/servicos';
+    private baseUrl = `${environment.apiUrl}/servicos`;
 
     constructor(private http: HttpClient) { }
 

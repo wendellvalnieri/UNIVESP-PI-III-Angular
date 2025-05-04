@@ -3,7 +3,8 @@ export interface Credenciais {
     password: string;
 }
 
-export interface TokenResponse {
-    access: string;
-    refresh: string;
+export interface ResponseRequest {
+    data:any;
+    message: string;
+    success: boolean;
 }

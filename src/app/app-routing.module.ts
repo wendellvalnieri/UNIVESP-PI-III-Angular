@@ -31,6 +31,11 @@ const routes: Routes = [
         canActivate: [AuthGuard]
     },
     {
+        path: 'servicos/:id',
+        component: ServicoFormComponent,
+        canActivate: [AuthGuard]
+    },
+    {
         path: 'servicos/editar/:id',
         component: ServicoFormComponent,
         canActivate: [AuthGuard]

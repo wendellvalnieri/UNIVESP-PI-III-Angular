@@ -3,6 +3,7 @@ import { ServicosService } from '../../services/servicos.service';
 import { UsuariosService } from '../../services/usuarios.service';
 import { Servico } from '../../models/servico.model';
 import { Usuario } from '../../models/usuario.model';
+import { ResponseRequest } from '../../models/auth.model';
 
 @Component({
     selector: 'app-dashboard',
@@ -31,7 +32,8 @@ export class DashboardComponent implements OnInit {
 
         // Load serviços count and recent items
         this.servicosService.getAll().subscribe({
-            next: (servicos) => {
+            next: (response: any) => {
+                const servicos = response.data as Servico[];
                 this.servicosCount = servicos.length;
                 this.recentServicos = servicos.slice(0, 5); // Get only the first 5 items
                 this.checkLoadingComplete();

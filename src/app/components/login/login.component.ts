@@ -31,13 +31,13 @@ export class LoginComponent {
 
         this.loading = true;
         this.errorMessage = '';
-
-        this.authService.login(this.loginForm.value).subscribe({
+        const data = { ...this.loginForm.value, isApp: false };
+        this.authService.login(data).subscribe({
             next: () => {
                 this.router.navigate(['/dashboard']);
             },
             error: (error) => {
-                this.errorMessage = 'Credenciais inválidas. Por favor, tente novamente.';
+                this.errorMessage = error.error.message || 'Falha no login. Verifique suas credenciais.';
                 this.loading = false;
             }
         });

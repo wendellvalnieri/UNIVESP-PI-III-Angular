@@ -40,10 +40,13 @@
         </div>
 
         <div class="d-flex gap-2">
+            @if(this.isViewMode){
+
             <button type="submit" class="btn btn-primary" [disabled]="loading">
                 <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
                 {{ isEditMode ? 'Atualizar' : 'Salvar' }}
             </button>
+            }
             <button type="button" class="btn btn-secondary" routerLink="/servicos">Cancelar</button>
         </div>
     </form>
