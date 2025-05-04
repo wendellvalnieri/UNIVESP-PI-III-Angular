@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Credenciais, TokenResponse } from '../models/auth.model';
 import { isPlatformBrowser } from '@angular/common';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    private baseUrl = 'http://localhost:4333';
+    private baseUrl = environment.apiUrl;
     private isBrowser: boolean;
     private tokenSubject: BehaviorSubject<string | null>;
     public token$: Observable<string | null>;
