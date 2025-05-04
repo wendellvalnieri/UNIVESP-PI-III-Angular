@@ -1,6 +1,6 @@
 export interface Usuario {
     id?: string;
-    password: string;
+    password?: string;
     is_superuser: boolean;
     username: string;
     first_name: string;
