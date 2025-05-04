@@ -1,0 +1,88 @@
+<div class="container mt-4">
+    <h2>Dashboard</h2>
+
+    <div *ngIf="loading" class="text-center my-5">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Carregando...</span>
+        </div>
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+    <div class="row mt-4" *ngIf="!loading">
+        <!-- Cards de estatísticas -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Serviços</h5>
+                    <p class="card-text display-4">{{ servicosCount }}</p>
+                    <a routerLink="/servicos" class="btn btn-primary">Ver Serviços</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Usuários</h5>
+                    <p class="card-text display-4">{{ usuariosCount }}</p>
+                    <a routerLink="/usuarios" class="btn btn-primary">Ver Usuários</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Serviços recentes -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    Serviços Recentes
+                </div>
+                <div class="card-body">
+                    <div *ngIf="recentServicos.length === 0" class="text-center py-3">
+                        <p>Nenhum serviço cadastrado.</p>
+                    </div>
+                    <ul class="list-group list-group-flush" *ngIf="recentServicos.length > 0">
+                        <li class="list-group-item" *ngFor="let servico of recentServicos">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-0">{{ servico.nome }}</h6>
+                                    <small class="text-muted">{{ servico.preco | currency:'BRL' }}</small>
+                                </div>
+                                <span [ngClass]="servico.ativo ? 'badge bg-success' : 'badge bg-danger'">
+                                    {{ servico.ativo ? 'Ativo' : 'Inativo' }}
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usuários recentes -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    Usuários Recentes
+                </div>
+                <div class="card-body">
+                    <div *ngIf="recentUsuarios.length === 0" class="text-center py-3">
+                        <p>Nenhum usuário cadastrado.</p>
+                    </div>
+                    <ul class="list-group list-group-flush" *ngIf="recentUsuarios.length > 0">
+                        <li class="list-group-item" *ngFor="let usuario of recentUsuarios">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-0">{{ usuario.first_name }} {{ usuario.last_name }}</h6>
+                                    <small class="text-muted">{{ usuario.email }}</small>
+                                </div>
+                                <span [ngClass]="usuario.is_active ? 'badge bg-success' : 'badge bg-danger'">
+                                    {{ usuario.is_active ? 'Ativo' : 'Inativo' }}
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

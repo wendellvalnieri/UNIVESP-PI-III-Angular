@@ -1,0 +1,81 @@
+<div class="container mt-4">
+    <h2>{{ isEditMode ? 'Editar' : 'Novo' }} Usuário</h2>
+
+    <div *ngIf="loading" class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Carregando...</span>
+        </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()" *ngIf="!loading || isEditMode">
+        <div class="mb-3">
+            <label for="username" class="form-label">Nome de Usuário</label>
+            <input type="text" id="username" formControlName="username" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && usuarioForm.get('username')?.invalid }" />
+            <div *ngIf="submitted && usuarioForm.get('username')?.invalid" class="invalid-feedback">
+                <div *ngIf="usuarioForm.get('username')?.errors?.['required']">Nome de usuário é obrigatório</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">{{ isEditMode ? 'Senha (deixe em branco para manter a atual)' :
+                'Senha' }}</label>
+            <input type="password" id="password" formControlName="password" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && usuarioForm.get('password')?.invalid }" />
+            <div *ngIf="submitted && usuarioForm.get('password')?.invalid" class="invalid-feedback">
+                <div *ngIf="usuarioForm.get('password')?.errors?.['required']">Senha é obrigatória</div>
+                <div *ngIf="usuarioForm.get('password')?.errors?.['minlength']">Senha deve ter pelo menos 6 caracteres
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="first_name" class="form-label">Nome</label>
+            <input type="text" id="first_name" formControlName="first_name" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && usuarioForm.get('first_name')?.invalid }" />
+            <div *ngIf="submitted && usuarioForm.get('first_name')?.invalid" class="invalid-feedback">
+                <div *ngIf="usuarioForm.get('first_name')?.errors?.['required']">Nome é obrigatório</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Sobrenome</label>
+            <input type="text" id="last_name" formControlName="last_name" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" formControlName="email" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && usuarioForm.get('email')?.invalid }" />
+            <div *ngIf="submitted && usuarioForm.get('email')?.invalid" class="invalid-feedback">
+                <div *ngIf="usuarioForm.get('email')?.errors?.['required']">Email é obrigatório</div>
+                <div *ngIf="usuarioForm.get('email')?.errors?.['email']">Email inválido</div>
+            </div>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" id="is_active" formControlName="is_active" class="form-check-input" />
+            <label for="is_active" class="form-check-label">Ativo</label>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" id="is_staff" formControlName="is_staff" class="form-check-input" />
+            <label for="is_staff" class="form-check-label">Staff</label>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" id="is_superuser" formControlName="is_superuser" class="form-check-input" />
+            <label for="is_superuser" class="form-check-label">Admin</label>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary" [disabled]="loading">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                {{ isEditMode ? 'Atualizar' : 'Salvar' }}
+            </button>
+            <button type="button" class="btn btn-secondary" routerLink="/usuarios">Cancelar</button>
+        </div>
+    </form>
+</div>
