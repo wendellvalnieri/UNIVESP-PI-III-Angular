@@ -12,6 +12,7 @@ import { ServicosListComponent } from './components/servicos/servicos-list/servi
 import { UsuarioFormComponent } from './components/usuarios/usuario-form/usuario-form.component';
 import { UsuariosListComponent } from './components/usuarios/usuarios-list/usuarios-list.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { AgendamentosListComponent } from './components/agendamentos/agendamentos-list/agendamentos-list.component';
 
 
 
@@ -25,6 +26,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
         ServicoFormComponent,
         UsuariosListComponent,
         UsuarioFormComponent,
+        AgendamentosListComponent
     ],
     imports: [
         BrowserModule,

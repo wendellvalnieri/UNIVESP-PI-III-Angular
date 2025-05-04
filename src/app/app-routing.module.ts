@@ -7,6 +7,7 @@ import { ServicoFormComponent } from './components/servicos/servico-form/servico
 import { UsuariosListComponent } from './components/usuarios/usuarios-list/usuarios-list.component';
 import { UsuarioFormComponent } from './components/usuarios/usuario-form/usuario-form.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AgendamentosListComponent } from './components/agendamentos/agendamentos-list/agendamentos-list.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -43,6 +44,11 @@ const routes: Routes = [
     {
         path: 'usuarios',
         component: UsuariosListComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'agendamentos',
+        component: AgendamentosListComponent,
         canActivate: [AuthGuard]
     },
     {
