@@ -3,6 +3,26 @@
         <h2>Lista de Agendamentos</h2>
     </div>
 
+    <!-- Indicadores de contagem por status -->
+    <div class="mb-3 d-flex flex-wrap gap-2">
+        <span class="btn badge bg-primary rounded-pill" (click)="statusSelecionado = 'todos'; filtrarPorStatus()"
+            [ngClass]="{'opacity-75': statusSelecionado !== 'todos', 'cursor-pointer': true}">
+            Todos ({{agendamentosOriginal.length}})
+        </span>
+        <span class="btn  badge bg-success rounded-pill" (click)="statusSelecionado = 'agendado'; filtrarPorStatus()"
+            [ngClass]="{'opacity-75': statusSelecionado !== 'agendado', 'cursor-pointer': true}">
+            Agendados ({{contarAgendamentosPorStatus('agendado')}})
+        </span>
+        <span class=" btn  badge bg-info rounded-pill" (click)="statusSelecionado = 'finalizado'; filtrarPorStatus()"
+            [ngClass]="{'opacity-75': statusSelecionado !== 'finalizado', 'cursor-pointer': true}">
+            Finalizados ({{contarAgendamentosPorStatus('finalizado')}})
+        </span>
+        <span class="btn  badge bg-danger rounded-pill" (click)="statusSelecionado = 'cancelado'; filtrarPorStatus()"
+            [ngClass]="{'opacity-75': statusSelecionado !== 'cancelado', 'cursor-pointer': true}">
+            Cancelados ({{contarAgendamentosPorStatus('cancelado')}})
+        </span>
+    </div>
+
     <div *ngIf="loading" class="text-center">
         <div class="spinner-border" role="status">
             <span class="visually-hidden">Carregando...</span>
@@ -12,7 +32,7 @@
     <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
 
     <div *ngIf="!loading && agendamentos.length === 0" class="alert alert-info">
-        Nenhum serviço encontrado.
+        Nenhum agendamento encontrado para o filtro selecionado.
     </div>
 
     <div *ngIf="!loading && agendamentos.length > 0" class="table-responsive">
@@ -24,15 +44,25 @@
                     <th>Data</th>
                     <th>Hora</th>
                     <th>Preço</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let item of agendamentos">
                     <td>{{ item.nome_usuario }}</td>
                     <td>{{ item.nome_servico }}</td>
-                    <td>{{ item.data_reserva  | date:"dd/MM/YYYY"}}</td>
+                    <td>{{ item.data_reserva | date:"dd/MM/YYYY"}}</td>
                     <td>{{ item.hora_reserva }}</td>
                     <td>{{ item.preco | currency:'BRL' }}</td>
+                    <td>
+                        <span class="badge" [ngClass]="{
+                                'bg-success': item.status === 'agendado',
+                                'bg-info': item.status === 'finalizado',
+                                'bg-danger': item.status === 'cancelado'
+                              }">
+                            {{ item.status | uppercase }}
+                        </span>
+                    </td>
                 </tr>
             </tbody>
         </table>
