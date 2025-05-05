@@ -13,6 +13,7 @@ import { UsuarioFormComponent } from './components/usuarios/usuario-form/usuario
 import { UsuariosListComponent } from './components/usuarios/usuarios-list/usuarios-list.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { AgendamentosListComponent } from './components/agendamentos/agendamentos-list/agendamentos-list.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 
@@ -33,6 +34,7 @@ import { AgendamentosListComponent } from './components/agendamentos/agendamento
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
+        SweetAlert2Module,
         HttpClientModule
     ],
     providers: [

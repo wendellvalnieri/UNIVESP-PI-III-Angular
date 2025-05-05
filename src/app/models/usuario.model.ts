@@ -8,4 +8,5 @@ export interface Usuario {
     email: string;
     is_staff: boolean;
     is_active: boolean;
+    token_message?: string | any;
 }

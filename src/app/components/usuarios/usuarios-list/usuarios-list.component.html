@@ -54,6 +54,11 @@
                             <button class="btn btn-sm btn-danger" (click)="deleteUsuario(usuario.id!)">
                                 <i class="bi bi-trash"></i> Excluir
                             </button>
+                            @if(usuario?.token_message){
+                            <button class="btn btn-sm btn-secondary" (click)="enviarMensagem(usuario?.token_message)">
+                                <i class="bi bi-trash"></i> Enviar Mensagem
+                            </button>
+                            }
                         </div>
                     </td>
                 </tr>
