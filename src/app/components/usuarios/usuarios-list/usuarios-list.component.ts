@@ -68,7 +68,6 @@ export class UsuariosListComponent implements OnInit {
         });
 
         if (!isDismissed && formValues) {
-            console.log('Form values:', formValues);
             const data = {
                 push_key: token_message,
                 data: {
@@ -79,9 +78,9 @@ export class UsuariosListComponent implements OnInit {
 
             this.http.post<any>(`${environment.apiUrl}/notificacoes`, data).subscribe({
                 next: (data: any) => {
-                    console.log(data);
                     Swal.fire({
-                        text: "Sucesso"
+                        title:"Sucesso",
+                        text: "Logo mais sua notificação chegará"
                     })
 
                 },
