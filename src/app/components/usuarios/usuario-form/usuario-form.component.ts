@@ -82,7 +82,7 @@ export class UsuarioFormComponent implements OnInit {
             email: this.usuarioForm.value.email,
             is_active: this.usuarioForm.value.is_active,
             is_staff: this.usuarioForm.value.is_staff,
-            is_superuser: this.usuarioForm.value.is_superuser
+            is_superuser: this.usuarioForm.value.is_superuser,
         };
 
         if (this.isEditMode) {

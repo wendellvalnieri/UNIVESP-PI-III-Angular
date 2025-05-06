@@ -40,7 +40,7 @@
         </div>
 
         <div class="d-flex gap-2">
-            @if(this.isViewMode){
+            @if(!this.isViewMode || this.isEditMode){
 
             <button type="submit" class="btn btn-primary" [disabled]="loading">
                 <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
