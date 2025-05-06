@@ -25,7 +25,7 @@ export class AgendamentosListComponent implements OnInit {
         this.agendamentosService.getAll().subscribe({
             next: (data: any) => {
                 const response = data.data;
-                const agrupados = this.processarEAgruparReservas(response);
+                const agrupados = this.agruparReservas(response);
 
                 this.agendamentosOriginal = Object.values(agrupados).flat();
 
@@ -40,26 +40,12 @@ export class AgendamentosListComponent implements OnInit {
         });
     }
 
-    processarEAgruparReservas(reservas: any[]): any {
-        const agora = new Date();
+    agruparReservas(reservas: any[]): any {
 
-        const reservasProcessadas = reservas.map(reserva => {
-            const reservaAtualizada = { ...reserva };
-
-            const [ano, mes, dia] = reserva.data_reserva.split('T')[0].split('-').map(Number);
-            const [hora, minuto] = reserva.hora_reserva.split(':').map(Number);
-            const dataHoraReserva = new Date(ano, mes - 1, dia, hora, minuto);
-
-            if (dataHoraReserva < agora && reserva.status === 'agendado') {
-                reservaAtualizada.status = 'finalizado';
-            }
-
-            return reservaAtualizada;
-        });
 
         const reservasAgrupadas: any = {};
 
-        reservasProcessadas.forEach(reserva => {
+        reservas.forEach(reserva => {
             if (!reservasAgrupadas[reserva.status]) {
                 reservasAgrupadas[reserva.status] = [];
             }
